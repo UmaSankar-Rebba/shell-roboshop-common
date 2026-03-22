@@ -43,4 +43,38 @@ NODEJS_SETUP(){
     VALIDATE $? "INstalling dependiens"
 }
 
+APP_SETUP(){
+    id roboshop
+if [ $? -ne 0 ]; then {
+    useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
+    VALIDATE $? "Creating syst  em user"
+}
+else
+ echo -e "$C User already exists skipping $N"
+fi
+}
+
+SYSTEM_CTL(){
+    cp $SCRIPT_DIR/$app_name.service /etc/systemd/system/$app_name.service
+    VALIDATE $? "Created systemctl service"
+    systemctl daemon-reload
+    systemctl enable $app_name
+    systemctl start $app_name
+}
+#Downloading app
+mkdir -p /app
+VALIDATE $? "creating app directory"
+
+curl -o /tmp/$app_name.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip &>>$LOGS_FILES
+VALIDATE $? "Downloading catalogue code"
+
+cd /app
+VALIDATE $? "Changing directory"
+
+rm -rf /app/*
+VALIDATE $? "Removing existing data in the folder"
+
+unzip /tmp/$app_name.zip &>>$LOGS_FILES
+VALIDATE $? "Unzip the code file"
+
 echo "$(date "+%y-%m-%d") | Script ended at time $(date)"

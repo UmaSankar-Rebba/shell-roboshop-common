@@ -43,15 +43,4 @@ NODEJS_SETUP(){
     VALIDATE $? "INstalling dependiens"
 }
 
-MONGODB_SETUP(){
-    dnf install mongodb-org -y &>>$LOGS_FILES
-    VALIDATE $? "Installing Mongodb"
-
-    systemctl enable mongod &>>$LOGS_FILES
-    VALIDATE $? "Enabling Mongodb"
-
-    systemctl start mongod &>>$LOGS_FILES
-    VALIDATE $? "Starting Mongodb"
-}
-
 echo "$(date "+%y-%m-%d") | Script ended at time $(date)"

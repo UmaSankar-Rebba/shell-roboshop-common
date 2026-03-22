@@ -9,12 +9,16 @@ N="\e[0m"
 SCRIPT_DIR=$PWD
 MYSQL_HOST=mysql.rebba.online
 
-echo "$(date "+%y-%m-%d") | Script started at time $(date)"
-if [ $USER_ID -ne 0 ]; then
- echo -e " $R You dont have permission to access this operation $N.$G Please contact sudo Admin $N"
- exit 1
-fi
 mkdir -p $LOGS_FOLDER
+
+echo "$(date "+%y-%m-%d") | Script started at time $(date)"
+
+USER_CHECK(){
+    if [ $USER_ID -ne 0 ]; then
+     echo -e " $R You dont have permission to access this operation $N.$G Please contact sudo Admin $N"
+     exit 1
+fi
+}
 
 VALIDATE(){
     if [ $1 -ne 0 ]; then
@@ -24,3 +28,30 @@ VALIDATE(){
      echo -e "$G "$(date +%y-%m-%d %H:%M:%S)" $2 is Success $N" | tee -a $LOGS_FILES
     fi
 }
+
+NODEJS_SETUP(){
+    dnf module disable nodejs -y &>>$LOGS_FILES
+    VALIDATE $? "Disabling nodejs default version"
+
+    dnf module enable nodejs:20 -y&>>$LOGS_FILES
+    VALIDATE $? "ENABLE NODEJS 20 version"
+
+    dnf install nodejs -y&>>$LOGS_FILES
+    VALIDATE $? "Installing nodejs"
+
+    npm install &>>$LOGS_FILES
+    VALIDATE $? "INstalling dependiens"
+}
+
+MONGODB_SETUP(){
+    dnf install mongodb-org -y &>>$LOGS_FILES
+    VALIDATE $? "Installing Mongodb"
+
+    systemctl enable mongod &>>$LOGS_FILES
+    VALIDATE $? "Enabling Mongodb"
+
+    systemctl start mongod &>>$LOGS_FILES
+    VALIDATE $? "Starting Mongodb"
+}
+
+echo "$(date "+%y-%m-%d") | Script ended at time $(date)"

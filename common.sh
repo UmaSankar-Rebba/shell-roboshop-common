@@ -9,7 +9,7 @@ N="\e[0m"
 SCRIPT_DIR=$PWD
 MYSQL_HOST=mysql.rebba.online
 
-echo "$(date +%y-%m-%d)" | start time is $date
+echo "$(date "+%y-%m-%d") | Script started at time $(date)"
 if [ $USER_ID -ne 0 ]; then
  echo -e " $R You dont have permission to access this operation $N.$G Please contact sudo Admin $N"
  exit 1

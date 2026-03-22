@@ -22,10 +22,10 @@ fi
 
 VALIDATE(){
     if [ $1 -ne 0 ]; then
-     echo -e "$R "$(date +%y-%m-%d %H:%M:%S)" $2 is Failure $N" | tee -a $LOGS_FILES
+     echo -e "$R "$(date "+%y-%m-%d %H:%M:%S")" $2 is Failure $N" | tee -a $LOGS_FILES
      exit 1
     else
-     echo -e "$G "$(date +%y-%m-%d %H:%M:%S)" $2 is Success $N" | tee -a $LOGS_FILES
+     echo -e "$G "$(date "+%y-%m-%d %H:%M:%S")" $2 is Success $N" | tee -a $LOGS_FILES
     fi
 }
 

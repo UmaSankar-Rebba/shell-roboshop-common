@@ -75,6 +75,9 @@ VALIDATE $? "Removing existing data in the folder"
 
 unzip /tmp/$app_name.zip &>>$LOGS_FILES
 VALIDATE $? "Unzip the code file"
+
+npm install &>>$LOGS_FILES
+VALIDATE $? "INstalling dependiens"
 }
 
 echo "$(date "+%y-%m-%d") | Script ended at time $(date)"

@@ -38,9 +38,6 @@ NODEJS_SETUP(){
 
     dnf install nodejs -y&>>$LOGS_FILES
     VALIDATE $? "Installing nodejs"
-
-    npm install &>>$LOGS_FILES
-    VALIDATE $? "INstalling dependiens"
 }
 
 SYSTEM_CTL(){

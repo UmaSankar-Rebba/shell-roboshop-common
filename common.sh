@@ -61,7 +61,7 @@ fi
 mkdir -p /app
 VALIDATE $? "creating app directory"
 
-curl -o /tmp/$app_name.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip &>>$LOGS_FILES
+curl -o /tmp/$app_name.zip https://roboshop-artifacts.s3.amazonaws.com/$app_name-v3.zip &>>$LOGS_FILES
 VALIDATE $? "Downloading $app_name code"
 
 cd /app

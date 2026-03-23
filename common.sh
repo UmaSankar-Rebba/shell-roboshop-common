@@ -77,4 +77,13 @@ npm install &>>$LOGS_FILES
 VALIDATE $? "INstalling dependiens"
 }
 
+PYTHON_SETUP(){
+    dnf install python3 gcc python3-devel -y &>>$LOGS_FILES
+    VALIDATE $? "Install python3 gcc"
+
+    cd /app
+    pip3 install -r requirements.txt &>>$LOGS_FILES
+    VALIDATE $? "Installing dependencies"
+}
+
 echo "$(date "+%y-%m-%d") | Script ended at time $(date)"

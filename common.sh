@@ -33,11 +33,14 @@ NODEJS_SETUP(){
     dnf module disable nodejs -y &>>$LOGS_FILES
     VALIDATE $? "Disabling nodejs default version"
 
-    dnf module enable nodejs:20 -y&>>$LOGS_FILES
+    dnf module enable nodejs:20 -y &>>$LOGS_FILES
     VALIDATE $? "ENABLE NODEJS 20 version"
 
-    dnf install nodejs -y&>>$LOGS_FILES
+    dnf install nodejs -y &>>$LOGS_FILES
     VALIDATE $? "Installing nodejs"
+
+    npm install &>>$LOGS_FILES
+    VALIDATE $? "INstalling dependiens"
 }
 
 SYSTEM_CTL(){
@@ -72,9 +75,6 @@ VALIDATE $? "Removing existing data in the folder"
 
 unzip /tmp/$app_name.zip &>>$LOGS_FILES
 VALIDATE $? "Unzip the code file"
-
-npm install &>>$LOGS_FILES
-VALIDATE $? "INstalling dependiens"
 }
 
 PYTHON_SETUP(){

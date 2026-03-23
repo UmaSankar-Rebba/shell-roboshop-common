@@ -1,7 +1,7 @@
 #!/bin/bash
 
-source ./common.sh
 app_name=payment
+source ./common.sh
 
 USER_CHECK
 APP_SETUP

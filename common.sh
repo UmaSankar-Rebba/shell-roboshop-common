@@ -43,6 +43,16 @@ NODEJS_SETUP(){
     VALIDATE $? "INstalling dependiens"
 }
 
+
+
+SYSTEM_CTL(){
+    cp $SCRIPT_DIR/$app_name.service /etc/systemd/system/$app_name.service
+    VALIDATE $? "Created systemctl service"
+    systemctl daemon-reload
+    systemctl enable $app_name
+    systemctl start $app_name
+}
+
 APP_SETUP(){
     id roboshop
 if [ $? -ne 0 ]; then {
@@ -52,15 +62,6 @@ if [ $? -ne 0 ]; then {
 else
  echo -e "$C User already exists skipping $N"
 fi
-}
-
-SYSTEM_CTL(){
-    cp $SCRIPT_DIR/$app_name.service /etc/systemd/system/$app_name.service
-    VALIDATE $? "Created systemctl service"
-    systemctl daemon-reload
-    systemctl enable $app_name
-    systemctl start $app_name
-}
 #Downloading app
 mkdir -p /app
 VALIDATE $? "creating app directory"
@@ -76,5 +77,6 @@ VALIDATE $? "Removing existing data in the folder"
 
 unzip /tmp/$app_name.zip &>>$LOGS_FILES
 VALIDATE $? "Unzip the code file"
+}
 
 echo "$(date "+%y-%m-%d") | Script ended at time $(date)"

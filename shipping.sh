@@ -1,5 +1,5 @@
 #!/bin/bash
-
+app_name=shipping
 source ./common.sh
 USER_CHECK
 APP_SETUP

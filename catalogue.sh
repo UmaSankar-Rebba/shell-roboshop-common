@@ -3,7 +3,6 @@
 source ./common.sh
 
 app_name=catalogue
-
 USER_CHECK
 NODEJS_SETUP
 APP_SETUP

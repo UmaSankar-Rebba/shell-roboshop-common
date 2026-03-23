@@ -43,8 +43,6 @@ NODEJS_SETUP(){
     VALIDATE $? "INstalling dependiens"
 }
 
-
-
 SYSTEM_CTL(){
     cp $SCRIPT_DIR/$app_name.service /etc/systemd/system/$app_name.service
     VALIDATE $? "Created systemctl service"

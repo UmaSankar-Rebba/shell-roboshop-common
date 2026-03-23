@@ -86,4 +86,21 @@ PYTHON_SETUP(){
     VALIDATE $? "Installing dependencies"
 }
 
+JAVA_SETUP(){
+    dnf install maven -y &>>$LOGS_FILES
+    VALIDATE $? "Installing maven"
+
+    cd /app &>>$LOGS_FILES
+    mvn clean package &>>$LOGS_FILES
+    VALIDATE $? "installing and building shipping"
+
+    mv target/shipping-1.0.jar shipping.jar &>>$LOGS_FILES
+    VALIDATE $? "moving and renaming shipping"
+}
+
+APP_RESTART(){
+    systemctl restart $app_name
+    VALIDATE $? "restart $app_name"
+}
+
 echo "$(date "+%y-%m-%d") | Script ended at time $(date)"

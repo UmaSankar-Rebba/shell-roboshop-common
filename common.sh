@@ -9,8 +9,6 @@ N="\e[0m"
 SCRIPT_DIR=$PWD
 MYSQL_HOST=mysql.rebba.online
 
-mkdir -p $LOGS_FOLDER
-
 echo "$(date "+%y-%m-%d") | Script started at time $(date)"
 
 USER_CHECK(){
@@ -19,6 +17,8 @@ USER_CHECK(){
      exit 1
 fi
 }
+
+mkdir -p $LOGS_FOLDER
 
 VALIDATE(){
     if [ $1 -ne 0 ]; then

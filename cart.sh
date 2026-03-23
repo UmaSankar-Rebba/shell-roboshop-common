@@ -3,6 +3,7 @@
 source ./common.sh
 app_name=cart
 
+USER_CHECK
 NODEJS_SETUP
 APP_SETUP
 SYSTEM_CTL
